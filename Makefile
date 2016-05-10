@@ -39,16 +39,26 @@ all: build
 # Reference the build instructions at http://www.esp8266.com/wiki/doku.php?id=toolchain
 
 .PHONY: build
-build: download-sdk
-	make -C $(sdk_subdir)
+build: build-sdk
+	echo XXXX make ???
 
 .PHONY: load
 load: build
-	make -C $(sdk_subdir) not-yet-defined
+	echo DISABLED make -C $(sdk_subdir) todo add something here for the python loader
 
 .PHONY: clean
 clean:
 	make -C $(sdk_subdir) clean
+	cd $(sdk_subdir); git pull
+	cd $(sdk_subdir); git submodule sync
+	cd $(sdk_subdir); git submodule update --init
+
+# Just build the STANDALONE mode:
+.PHONY: build-sdk
+build-sdk: $(sdk_subdir)/xtensa-lx106-elf
+
+$(sdk_subdir)/xtensa-lx106-elf : download-sdk
+	make -C $(sdk_subdir)
 
 .PHONY: download-sdk
 download-sdk: install-packages
