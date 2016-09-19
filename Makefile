@@ -63,9 +63,7 @@ $(sdk_subdir)/xtensa-lx106-elf/.done : apply-patches
 
 .PHONY: apply-patches
 apply-patches : download-sdk
-	@echo
 	@echo 'Hack around bug: Ensure that $$(TOOLCHAIN)/bin exists before esptool rule copies things into it:'
-	@echo
 	mkdir -p $(sdk_subdir)/xtensa-lx106-elf/bin
 
 .PHONY: download-sdk
