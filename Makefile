@@ -66,9 +66,7 @@ apply-patches : download-sdk
 	@echo
 	@echo 'Hack around bug: Ensure that $$(TOOLCHAIN)/bin exists before esptool rule copies things into it:'
 	@echo
-	(cat $(sdk_subdir)/Makefile; echo '\n\nmake_toolchain_bin_dir:\n\tmkdir -p $$(TOOLCHAIN)/bin') > Makefile.patched
-	make -C $(sdk_subdir) -f `pwd`/Makefile.patched make_toolchain_bin_dir
-	rm -f Makefile.patched
+	mkdir -p $(sdk_subdir)/xtensa-lx106-elf/bin
 
 .PHONY: download-sdk
 download-sdk: install-packages
