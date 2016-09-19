@@ -55,7 +55,7 @@ clean:
 
 # Just build the STANDALONE mode:
 .PHONY: build-sdk
-build-sdk: $(sdk_subdir)/xtensa-lx106-elf
+build-sdk: $(sdk_subdir)/xtensa-lx106-elf/.done
 
 $(sdk_subdir)/xtensa-lx106-elf/.done : apply-patches
 	make -C $(sdk_subdir)
