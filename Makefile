@@ -57,8 +57,18 @@ clean:
 .PHONY: build-sdk
 build-sdk: $(sdk_subdir)/xtensa-lx106-elf
 
-$(sdk_subdir)/xtensa-lx106-elf : download-sdk
+$(sdk_subdir)/xtensa-lx106-elf/.done : apply-patches
 	make -C $(sdk_subdir)
+	@touch $@
+
+.PHONY: apply-patches
+apply-patches : download-sdk
+	@echo
+	@echo 'Hack around bug: Ensure that $$(TOOLCHAIN)/bin exists before esptool rule copies things into it:'
+	@echo
+	(cat $(sdk_subdir)/Makefile; echo '\n\nmake_toolchain_bin_dir:\n\tmkdir -p $$(TOOLCHAIN)/bin') > Makefile.patched
+	make -C $(sdk_subdir) -f `pwd`/Makefile.patched make_toolchain_bin_dir
+	rm -f Makefile.patched
 
 .PHONY: download-sdk
 download-sdk: install-packages
@@ -74,6 +84,11 @@ download-sdk: install-packages
 			echo ; \
 			exit 1; \
 		fi; \
+	else \
+		echo ; \
+		echo Note: Updating sdk from $(sdk_git_repo) ...; \
+		echo ; \
+		(cd $(sdk_subdir); git pull); \
 	fi
 
 .PHONY: install-packages
