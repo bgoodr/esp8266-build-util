@@ -58,7 +58,7 @@ clean:
 build-sdk: $(sdk_subdir)/xtensa-lx106-elf/.done
 
 $(sdk_subdir)/xtensa-lx106-elf/.done : apply-patches
-	make -C $(sdk_subdir)
+	cd $(sdk_subdir); make
 	@touch $@
 
 .PHONY: apply-patches
