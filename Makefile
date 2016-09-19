@@ -110,3 +110,4 @@ install-packages:
 	$(call install_linux_package,unzip,/usr/bin/unzip)
 	$(call install_linux_package,bash,/bin/bash)
 	$(call install_linux_package,libtool-bin,/usr/bin/libtool)
+	$(call install_linux_package,help2man,/usr/bin/help2man)
