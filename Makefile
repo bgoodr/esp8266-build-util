@@ -40,7 +40,7 @@ all: build
 
 .PHONY: build
 build: build-sdk
-	echo XXXX make ???
+	echo "TODO build the local firmware in this directory from this rule"
 
 .PHONY: load
 load: build
