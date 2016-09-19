@@ -1,7 +1,7 @@
 # --------------------------------------------------------------------------------
 # Define customizable variables:
 # --------------------------------------------------------------------------------
-sdk_git_repo = git clone --recursive https://github.com/pfalcon/esp-open-sdk
+sdk_git_repo = https://github.com/pfalcon/esp-open-sdk
 sdk_subdir = esp-open-sdk
 
 # --------------------------------------------------------------------------------
